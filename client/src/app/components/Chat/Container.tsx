@@ -3,7 +3,8 @@ import Input from './Input';
 import Output from './Output';
 import { ChatMessage } from './Output';
 
-const ChatParticipants = {
+
+export const ChatParticipants = {
     USER: 'User',
     BOT: 'Cafe Rio Bot',
     SYSTEM: 'System',
@@ -18,29 +19,11 @@ const ChatContainer: React.FC = () => {
         setInputText(value);
     };
 
-    // const handleSubmit = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const response = await fetch('/chat', {
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify({ message: inputText }),
-    //         });
-    //         const data = await response.json();
-    //         setOutputText(data.reply || 'No response');
-    //     } catch (error) {
-    //         setOutputText('Error communicating with server.');
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
 
     const handleSubmit = async (input: string) => {
         setLoading(true);
-        // again refactor state here
-            const chatUpdate = [...outputText];
-            chatUpdate.push({ sender: ChatParticipants.USER, id: Date.now().toString(), message: input, timestamp: new Date().toISOString() });
+        outputText.push({ sender: ChatParticipants.USER, id: Date.now().toString(), message: input, timestamp: new Date().toISOString() });
+        setOutputText(outputText);
         try {
             const response = await fetch('http://localhost:8080/bot', {
                 method: 'POST',
@@ -51,8 +34,8 @@ const ChatContainer: React.FC = () => {
             console.log(message);
             if (message) {
                 //TODO likely usecase for better state management
-                 chatUpdate.push({ sender: ChatParticipants.BOT, id: Date.now().toString(), message, timestamp: new Date().toISOString() });
-                 setOutputText(chatUpdate);
+                 outputText.push({ sender: ChatParticipants.BOT, id: Date.now().toString(), message, timestamp: new Date().toISOString() });
+                 setOutputText(outputText);
                 // For now, just set the output text directly
                 // Note: The id and timestamp are not being used in this example, but can be added if needed
                 // For example, you could create a unique id using Date.now() and
