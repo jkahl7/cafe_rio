@@ -1,26 +1,28 @@
 import React from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemText } from '@mui/material';
+import { send } from 'process';
 
 export interface ChatMessage {
-    id: string;
+    sender: string;
     message: string;
-    timestamp: string;
+    id?: string;
+    timestamp?: string;
 }
 
 interface ChatOutputProps {
-    messages: ChatMessage[];
+    chatOutput: ChatMessage[];
 }
 
-const ChatOutput: React.FC<ChatOutputProps> = ({ messages }) => (
+const ChatOutput: React.FC<ChatOutputProps> = ({ chatOutput }) => (
     <Paper elevation={3} sx={{ p: 2, maxHeight: 400, overflowY: 'auto' }}>
         <List>
-            {messages.map(({ id,  message, timestamp }) => (
+            {chatOutput.map(({sender, id,  message, timestamp }) => (
                 <ListItem key={id} alignItems="flex-start">
                     <ListItemText
                         primary={
                             <Box display="flex" alignItems="center" gap={1}>
                                 <Typography variant="subtitle2" color="primary">
-                                    Cafe Rio Bot
+                                   {sender} 
                                 </Typography>
                                 {/* <Typography variant="caption" color="text.secondary">
                                     {new Date(timestamp).toLocaleTimeString()}

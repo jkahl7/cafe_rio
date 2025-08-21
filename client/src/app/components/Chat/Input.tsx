@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 export interface ChatInputProps {
     value: string;
     onChange: (value: string) => void;
-    onSubmit: () => void;
+    onSubmit: (input: string) => void;
     disabled: boolean;
 }
 
@@ -13,8 +13,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSubmit, disabled = false }) => 
     const [message, setMessage] = useState('');
 
     const handleSubmit = () => {
-        if (message.trim()) {
-            onSubmit();
+        const trimmedMessage = message.trim();
+        if (trimmedMessage) {
+            onSubmit(trimmedMessage);
             setMessage('');
         }
     };

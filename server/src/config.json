@@ -1,0 +1,7 @@
+{
+    "llm": {
+    "claude" : "cafe_rio",
+    "key": "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"
+    },
+    "port": 8080
+}
