@@ -1,0 +1,82 @@
+{
+    "name": "Cafe Rio",
+    "location": {
+        "address": "3209 NE 91st ST",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "90001"
+    },
+    "hours_of_operation": {
+        "monday": "7:00 AM - 8:00 PM",
+        "tuesday": "7:00 AM - 8:00 PM",
+        "wednesday": "7:00 AM - 8:00 PM",
+        "thursday": "7:00 AM - 8:00 PM",
+        "friday": "7:00 AM - 10:00 PM",
+        "saturday": "8:00 AM - 10:00 PM",
+        "sunday": "8:00 AM - 6:00 PM"
+    },
+    "about": {
+        "description": "Cafe Rio is a cozy coffee shop offering a variety of beverages and light meals. We pride ourselves on using high-quality ingredients and providing a welcoming atmosphere for our customers.",
+        "mission": "To create a community space where people can enjoy great coffee and food while connecting with others."
+    },
+    "wifi": {
+        "available": true,
+        "network_name": "CafeRio_WiFi",
+        "password": "bobbytables"
+    },
+    "menu": {
+        "drinks" : [
+            {
+                "name": "Latte",
+                "description": "Rich espresso with steamed milk",
+                "price": 4.0
+            },
+            {
+                "name": "Iced Tea",
+                "description": "Refreshing iced tea with lemon",
+                "price": 3.0
+            },
+            {
+                "name": "Smoothie",
+                "description": "Fruit smoothie with yogurt",
+                "price": 5.0
+            },
+             {
+            "name": "Cold Brew Coffee",
+            "description": "Smooth and refreshing cold brew coffee",
+            "price": 5.5
+        },
+        {
+            "name": "Espresso",
+            "description": "Rich and bold espresso shot",
+            "price": 2.5
+        },
+        {
+            "name": "Cappuccino",
+            "description": "Espresso with steamed milk and foam",
+            "price": 3.5
+        }
+        ],
+        "food" : [  
+        {
+            "name": "Avocado Toast",
+            "description": "Sourdough bread topped with smashed avocado and spices",
+            "price": 9.0
+        },
+        {
+            "name": "Caesar Salad",
+            "description": "Romaine lettuce, parmesan, croutons, Caesar dressing",
+            "price": 12.5
+        },
+        {
+            "name": "Blueberry Muffin",
+            "description": "Freshly baked muffin with blueberries",
+            "price": 4.0
+        },
+        {
+            "name": "Monster Cookie",
+            "description": "A large cookie with chocolate chips, oats, and M&Ms",
+            "price": 4.0
+        }
+    ]} 
+}
