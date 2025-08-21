@@ -5,6 +5,7 @@ const fs = require('fs');
 const config = require('../config.json');
 const axios = require('axios');
 
+const cafeData = require('../data/cafe_rio.json');
 router.post('/', async function(req, res, next) {
     try {
         const userContent = req.body.content;
@@ -25,9 +26,10 @@ router.post('/', async function(req, res, next) {
         // The content you want to send to the model
         const promptContent = {
           contents: [{
+            role: 'user',
             parts: [{
-              text: userContent
-            }]
+              text: `You are a helpful assistant that works to answer questions about a cafe named Cafe Rio. The following JSON is the information you have about Cafe Rio: ${JSON.stringify(cafeData)}. Use this information to answer the user's question: ${userContent}`,
+            }],
           }]
         };
 
@@ -40,7 +42,7 @@ router.post('/', async function(req, res, next) {
           const generatedText = response.data.candidates[0].content.parts[0].text;
           console.log('Generated Story:');
           console.log(generatedText);
-          res.json({ result: generatedText });
+          res.json(generatedText );
         } else {
           console.error(`Error: Received status code ${response.status}`);
           console.error(response.data);

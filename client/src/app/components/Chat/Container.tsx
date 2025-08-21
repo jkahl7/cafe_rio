@@ -3,7 +3,11 @@ import Input from './Input';
 import Output from './Output';
 import { ChatMessage } from './Output';
 
-
+const ChatParticipants = {
+    USER: 'User',
+    BOT: 'Cafe Rio Bot',
+    SYSTEM: 'System',
+};
 
 const ChatContainer: React.FC = () => {
     const [inputText, setInputText] = useState('');
@@ -36,27 +40,27 @@ const ChatContainer: React.FC = () => {
         setLoading(true);
         // again refactor state here
             const chatUpdate = [...outputText];
-            chatUpdate.push({ sender: 'User', id: Date.now().toString(), message: input, timestamp: new Date().toISOString() });
+            chatUpdate.push({ sender: ChatParticipants.USER, id: Date.now().toString(), message: input, timestamp: new Date().toISOString() });
         try {
             const response = await fetch('http://localhost:8080/bot', {
                 method: 'POST',
                 body: JSON.stringify({ content: input }),
                 headers: { 'Content-Type': 'application/json' },
             });
-            const data = await response.json();
-            console.log(data);
-            if (data) {
+            const message = await response.json();
+            console.log(message);
+            if (message) {
                 //TODO likely usecase for better state management
-                 chatUpdate.push({ sender: 'Cafe Rio Bot', id: Date.now().toString(), message: JSON.stringify(data), timestamp: new Date().toISOString() });
+                 chatUpdate.push({ sender: ChatParticipants.BOT, id: Date.now().toString(), message, timestamp: new Date().toISOString() });
                  setOutputText(chatUpdate);
                 // For now, just set the output text directly
                 // Note: The id and timestamp are not being used in this example, but can be added if needed
                 // For example, you could create a unique id using Date.now() and
             } else {
-                setOutputText([{sender: 'Server', message: 'No response'}]);
+                setOutputText([{sender: ChatParticipants.SYSTEM, message: 'No response'}]);
         }
         } catch (error) {
-                setOutputText([{sender: 'Server', message: 'Error communicating with server.'}]);
+                setOutputText([{sender:ChatParticipants.SYSTEM, message: 'Error communicating with server.'}]);
         } finally {
             setLoading(false);
         }
@@ -64,7 +68,7 @@ const ChatContainer: React.FC = () => {
 
     return (
         <div>
-            <Output chatOutput={outputText} />
+            <Output chatOutput={outputText} loading={loading} />
             <Input
                 value={inputText}
                 onChange={handleInputChange}
