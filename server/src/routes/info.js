@@ -1,12 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 const path = require('path');
 const fs = require('fs');
 
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-     const dataPath = path.join(__dirname, '../data/cafe_rio.json');
+router.get('/', (req, res) => {
+    const dataPath = path.join(__dirname, '../data/cafe_rio.json');
     fs.readFile(dataPath, 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ error: 'Unable to read data file.' });
@@ -17,6 +16,7 @@ router.get('/', function(req, res, next) {
         } catch (parseErr) {
             res.status(500).json({ error: 'Error parsing JSON data.' });
         }
-    });});
+    });
+});
 
 module.exports = router;
