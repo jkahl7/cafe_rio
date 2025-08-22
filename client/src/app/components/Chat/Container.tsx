@@ -41,6 +41,9 @@ const ChatContainer: React.FC = () => {
 
     const handleSubmit = async (input: string) => {
         setLoading(true);
+        outputText.push({ sender: ChatParticipants.USER, id: Date.now().toString(), message: input, timestamp: new Date().toISOString() });
+        setOutputText(outputText);
+
         if (containsTemperatureOrWeather(input)) {
             const temp = await fetchTemperature();
             outputText.push({ sender: ChatParticipants.SYSTEM, id: Date.now().toString(), message: `It is currently ${temp} degrees at Cafe Rio.`, timestamp: new Date().toISOString()  });
@@ -48,8 +51,7 @@ const ChatContainer: React.FC = () => {
             setLoading(false);
             return;
         }
-        outputText.push({ sender: ChatParticipants.USER, id: Date.now().toString(), message: input, timestamp: new Date().toISOString() });
-        setOutputText(outputText);
+
         try {
             const response = await fetch('http://localhost:8080/bot', {
                 method: 'POST',
