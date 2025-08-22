@@ -20,9 +20,34 @@ const ChatContainer: React.FC = () => {
         setInputText(value);
     };
 
+    const containsTemperatureOrWeather = (input: string): boolean => {
+        const lowerInput = input.toLowerCase();
+        return lowerInput.includes('temperature') || lowerInput.includes('weather');
+    };
+
+    const fetchTemperature = async (): Promise<string> => {
+        try {
+            const response = await fetch('http://localhost:8080/weather');
+            if (!response.ok) {
+                throw new Error('Failed to fetch temperature');
+            }
+            const data = await response.json();
+            console.log('Temperature data:', data);
+            return data;
+        } catch (error) {
+            return 'Error fetching temperature';
+        }
+    };
 
     const handleSubmit = async (input: string) => {
         setLoading(true);
+        if (containsTemperatureOrWeather(input)) {
+            const temp = await fetchTemperature();
+            outputText.push({ sender: ChatParticipants.SYSTEM, id: Date.now().toString(), message: `It is currently ${temp} degrees at Cafe Rio.`, timestamp: new Date().toISOString()  });
+            setOutputText(outputText);
+            setLoading(false);
+            return;
+        }
         outputText.push({ sender: ChatParticipants.USER, id: Date.now().toString(), message: input, timestamp: new Date().toISOString() });
         setOutputText(outputText);
         try {

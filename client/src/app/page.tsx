@@ -8,9 +8,6 @@ export default function Home() {
       <main className={styles.main}>
       <ChatContainer />
       </main>
-      <footer className={styles.footer}>
-        something for footer?
-      </footer>
     </div>
   );
 }
