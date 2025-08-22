@@ -21,6 +21,11 @@ const senderStyles: Record<string, { color: string; fontWeight?: number, alignIt
 };
 const ChatOutput: React.FC<ChatOutputProps> = ({ chatOutput }) => (
     <Paper elevation={3} sx={{ p: 2, maxHeight: 400, overflowY: 'auto' }}>
+        {chatOutput.length === 0 && (
+            <Typography variant="body2" color="text.secondary" align="center">
+                Type your question below and I will do my best to answer it.
+            </Typography>
+        )}
         <List>
             {chatOutput.map(({sender, id,  message, timestamp }) => (
                 <ListItem

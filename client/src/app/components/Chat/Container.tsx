@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Input from './Input';
 import Output from './Output';
 import { ChatMessage } from './Output';
+import { Typography } from '@mui/material';
 
 
 export const ChatParticipants = {
@@ -51,6 +52,9 @@ const ChatContainer: React.FC = () => {
 
     return (
         <div>
+            <Typography variant="body2" color="text.secondary" align="center"   style={{ fontWeight: 'bold', fontSize: 24, margin: 10}}>
+                 Ask me anything about Cafe Rio!
+            </Typography>
             <Output chatOutput={outputText} loading={loading} />
             <Input
                 value={inputText}

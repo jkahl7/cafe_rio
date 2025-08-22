@@ -1,5 +1,9 @@
 {
-    "llm": {
+    "gemini": {
+        "key":"AIzaSyBCvpiLgO1mPvRIRhbot5ms-Y4kwTuzFfk'"
+    },
+    "openWeather": {
+        "key": "92b1ed193e5e11b03e58c19357dfd7c1" 
     },
     "port": 8080
 }
